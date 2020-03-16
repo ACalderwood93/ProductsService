@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using MediatR;
 using ProductService.Application.Commands;
+using ProductService.Application.Dtos;
+using ProductService.Application.Queries;
 
 namespace ProductsService.Api.Controllers
 {
@@ -35,6 +37,32 @@ namespace ProductsService.Api.Controllers
                 return BadRequest();
             }
 
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult<ProductDTO>> Get(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest("invalid Id provided");
+            }
+
+            var query = new GetProductQuery()
+            {
+                ProductId = id
+            };
+
+            var result = await _mediator.Send(query);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

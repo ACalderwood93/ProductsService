@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MongoDB.Entities;
-using MongoDB.Entities.Core;
 
-namespace ProductService.Persistance.Entities
+namespace ProductService.Application.Dtos
 {
-    [Name("Products")]
-    public class Product : Entity
+    public class ProductDTO
     {
         public string Name { get; set; }
 

@@ -18,7 +18,7 @@ namespace ProductService.Application.CommandHandlers
             {
                 Active = request.Active.Value,
                 Price = request.Price.Value,
-                ProductName = request.Name
+                Name = request.Name
             };
 
             await product.SaveAsync();
