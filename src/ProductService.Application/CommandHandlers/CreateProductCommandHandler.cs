@@ -14,6 +14,11 @@ namespace ProductService.Application.CommandHandlers
     {
         public async Task<bool> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
+            if (request == null || !request.Active.HasValue || !request.Price.HasValue)
+            {
+                return false;
+            }
+
             var product = new Product
             {
                 Active = request.Active.Value,

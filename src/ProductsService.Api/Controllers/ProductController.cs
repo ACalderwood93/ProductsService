@@ -20,7 +20,7 @@ namespace ProductsService.Api.Controllers
 
         public ProductController(IMediator mediator)
         {
-            this._mediator = mediator;
+            _mediator = mediator;
         }
 
         [HttpPost]
@@ -53,15 +53,21 @@ namespace ProductsService.Api.Controllers
                 ProductId = id
             };
 
-            var result = await _mediator.Send(query);
-
-            if (result != null)
+            try
             {
-                return Ok(result);
+                var result = await _mediator.Send(query);
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest("Product could not be found");
+                }
             }
-            else
+            catch
             {
-                return BadRequest();
+                return BadRequest("Error Retrieving Product");
             }
         }
     }
