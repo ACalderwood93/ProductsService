@@ -16,8 +16,8 @@ namespace ProductService.Application.CommandHandlers
         {
             var product = new Product
             {
-                Active = request.Active,
-                Price = request.Price,
+                Active = request.Active.Value,
+                Price = request.Price.Value,
                 ProductName = request.Name
             };
 

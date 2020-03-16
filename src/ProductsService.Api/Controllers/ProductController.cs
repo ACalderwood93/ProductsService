@@ -22,6 +22,19 @@ namespace ProductsService.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<bool>> Post([FromBody] CreateProductCommand command) => Ok(await _mediator.Send(command));
+        public async Task<ActionResult> Post([FromBody] CreateProductCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+        }
     }
 }
