@@ -9,22 +9,8 @@ using System.Threading.Tasks;
 using System.Linq;
 namespace ProductService.Application.Tests.Unit.CommandHandlers
 {
-    public class CreateProductCommandHandlerTests
+    public class CreateProductCommandHandlerTests : BaseProductTest
     {
-        [OneTimeSetUp]
-        public void Setup()
-        {
-            new DB($"ProductService-Application-Unit-Tests");
-        }
-
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-            DB.Delete<Product>(x => true);
-        }
-
-
-
         [Test]
         public async Task Should_ReturnTrue_When_ValidCreateProductCommandGiven()
         {

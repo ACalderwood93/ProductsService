@@ -17,6 +17,11 @@ namespace ProductService.Application.QueryHandlers
         {
             var result = await DB.Find<Product>().OneAsync(request.ProductId);
 
+            if(result == null)
+            {
+                throw new ArgumentException("ID Not Found");
+            }
+
             return new ProductDTO
             {
                 Active = result.Active,
