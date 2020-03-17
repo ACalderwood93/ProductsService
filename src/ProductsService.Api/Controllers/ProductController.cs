@@ -28,9 +28,9 @@ namespace ProductsService.Api.Controllers
         {
             var result = await _mediator.Send(command);
 
-            if (result)
+            if (!string.IsNullOrEmpty(result))
             {
-                return Ok();
+                return Ok(result);
             }
             else
             {

@@ -10,13 +10,13 @@ using MongoDB.Entities;
 
 namespace ProductService.Application.CommandHandlers
 {
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, bool>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, string>
     {
-        public async Task<bool> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             if (request == null || !request.Active.HasValue || !request.Price.HasValue)
             {
-                return false;
+                throw new ArgumentException("Some Command properties were not valid");
             }
 
             var product = new Product
@@ -27,7 +27,7 @@ namespace ProductService.Application.CommandHandlers
             };
 
             await product.SaveAsync();
-            return true;
+            return product.ID.ToString();
         }
     }
 }

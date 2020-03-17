@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ProductService.Application.Commands
 {
-    public class CreateProductCommand : IRequest<bool>
+    public class CreateProductCommand : IRequest<string>
     {
         [Required]
         public string Name { get; set; }

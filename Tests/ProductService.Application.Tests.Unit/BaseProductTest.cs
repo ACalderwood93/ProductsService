@@ -18,5 +18,9 @@ namespace ProductService.Application.Tests.Unit
         [TearDown]
         public void TearDown() => DB.Delete<Product>(x => true);
 
+
+        [OneTimeTearDown]
+        public void OneTimeCleanup() => new MongoClient().DropDatabase(databaseName);
+
     }
 }
